@@ -28,13 +28,33 @@ def listar_contactos():
         print(f"   Teléfono: {contacto['telefono']}")
         print(f"   Email: {contacto['email']}")
 
+def buscar_contacto():
+    """Buscar un contacto por nombre"""
+    nombre_buscar = input("Ingrese el nombre a buscar: ").lower()
+    encontrados = []
+    
+    for contacto in contactos:
+        if nombre_buscar in contacto['nombre'].lower():
+            encontrados.append(contacto)
+    
+    if not encontrados:
+        print("No se encontraron contactos con ese nombre")
+        return
+    
+    print(f"\n=== CONTACTOS ENCONTRADOS ({len(encontrados)}) ===")
+    for i, contacto in enumerate(encontrados, 1):
+        print(f"\n{i}. {contacto['nombre']}")
+        print(f"   Teléfono: {contacto['telefono']}")
+        print(f"   Email: {contacto['email']}")
+
 def menu():
     """Mostrar el menú principal"""
     while True:
         print("\n=== AGENDA DE CONTACTOS ===")
         print("1. Agregar contacto")
         print("2. Listar contactos")
-        print("3. Salir")
+        print("3. Buscar contacto")
+        print("4. Salir")
         
         opcion = input("\nSeleccione una opción: ")
         
@@ -43,6 +63,8 @@ def menu():
         elif opcion == '2':
             listar_contactos()
         elif opcion == '3':
+            buscar_contacto()
+        elif opcion == '4':
             print("¡Hasta luego!")
             break
         else:
